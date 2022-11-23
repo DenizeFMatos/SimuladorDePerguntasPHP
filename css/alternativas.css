@@ -32,7 +32,7 @@ input[type="radio"]:checked:after {
 }
 input[type="radio"]::after {
     content: 'Marcar como correta';
-    font-size: 0.7rem;
+    font-size: 16px;
     text-align: center;
     background-color: rgba(61, 46, 123);
     color: white;
@@ -58,7 +58,7 @@ border: 2px solid;
 }
 
 input{
-    font-size: 30px;
+    font-size: 18px;
     margin: 10px;
 }
 
