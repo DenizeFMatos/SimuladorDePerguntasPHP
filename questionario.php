@@ -19,19 +19,28 @@
     $perguntaRepository = new PerguntaRepository($conexao);
     $alternativaRepository = new AlternativaRepository($conexao);
 
-    $perguntas = $perguntaRepository->listaPerguntasAleatorias();
+    if (isset($_POST) && !empty($_POST)) {
+        $ids = rtrim($_POST['idsPerguntas'], ',');
+        $perguntas = $perguntaRepository->listaPerguntasPorIds($ids);
+    } else {
+        $perguntas = $perguntaRepository->listaPerguntasAleatorias();
+    }
+
     foreach ($perguntas as $pergunta) {
         $alternativas = $alternativaRepository->buscaAlternativasDePergunta($pergunta->id);
         $pergunta->alternativas = $alternativas;
     }
 
     ?>
-    <form action="questionario.php" method="post">
+    <form action="questionario.php" method="POST">
         <ul>
             <?php
             $resposta = 0;
+            $idsPerguntas = '';
 
             foreach ($perguntas as $pergunta) {
+                $idsPerguntas = $idsPerguntas . $pergunta->id . ",";
+
                 if (isset($_POST) && !empty($_POST)) {
                     $resposta = $_POST['pergunta-' . $pergunta->id];
                 }
@@ -43,12 +52,12 @@
                 echo "</h3>";
 
                 if ($resposta == 0) {
-
                     echo '<ol class="alternativas">';
                 } else {
                     echo '<ol class="alternativas respondido" >';
                 }
                 foreach ($pergunta->alternativas as $alternativa) {
+
                     $classe = "alternativa";
                     $marcado = $resposta == $alternativa->id;
 
@@ -82,11 +91,12 @@
 
                 echo "</li>";
             }
+
+            echo "<input value=" . $idsPerguntas . " hidden name='idsPerguntas'>";
             ?>
         </ul>
         <?php
         if ($resposta == 0) {
-
             echo '<button id="enviar" disabled class="button" type="submit">Enviar Respostas</button>';
         } else
             echo '<a href="." class="button">Voltar</a>';

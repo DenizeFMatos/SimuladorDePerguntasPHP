@@ -30,6 +30,22 @@ class PerguntaRepository
         }
         return $rows;
     }
+
+
+    public function listaPerguntasPorIds($ids)
+    {
+        $query = "select id, pergunta from perguntas where id in (" . $ids . ") limit 10";
+        $perguntas = mysqli_query($this->conexao, $query);
+        $rows = [];
+        while ($row = $perguntas->fetch_row()) {
+            $rows[] = (object) [
+                'id' => $row['0'],
+                'pergunta' => $row['1'],
+            ];
+        }
+        return $rows;
+    }
+
     public function listaPerguntas()
     {
         $query = "select id, pergunta from perguntas order by pergunta";
