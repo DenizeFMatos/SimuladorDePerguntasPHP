@@ -1,5 +1,5 @@
 
-* {
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -30,18 +30,19 @@ input[type="radio"] {
 input[type="radio"]:checked:after {
     background-color: green;
 }
+
 input[type="radio"]::after {
     content: 'Marcar como correta';
-    font-size: 16px;
+    font-size: 13px;
     text-align: center;
-    background-color: rgba(61, 46, 123);
+    background-color: rgb(79, 53, 181);
     color: white;
     position: absolute;
     top: -16px;
     right: 0;
     width: 120px;
-    height: 26px;
-    padding-top: 12px
+    height: 14px;
+    padding: 12px;
 }
 
 h3{
@@ -58,7 +59,7 @@ border: 2px solid;
 }
 
 input{
-    font-size: 18px;
+    font-size: 30px;
     margin: 10px;
 }
 
