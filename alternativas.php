@@ -95,16 +95,6 @@
         <a href="./perguntas.php" class="button">Voltar</a>
         <br>
         <br>
-        <p>Alternativas Cadastradas</p>
-        <br>
-
-        <?php
-
-        while ($linha = mysqli_fetch_array($resultadoAlternativas)) {
-
-            echo "" . $linha['alternativa'] . "<br>";
-        }
-        ?>
 </body>
 
 </html>
